@@ -1,13 +1,16 @@
-# DS4Windows
+# DS4WindowsPlus
 
-Like those other DS4 tools, but sexier.
+DS4WindowsPlus is DS4Windows plus a new copilot feature, which allows players
+to combine two phyiscal controllers into one shared contoller, so they
+can have fun playing cooperatively, empowering young children or disabled
+people to play more games with the help of others.
 
 DS4Windows is an extract anywhere program that allows you to get the best
 DualShock 4 experience on your PC. By emulating an Xbox 360 controller, many
 more games are accessible. Other input controllers are also supported including the
-DualSense, Switch Pro, and JoyCon controllers (**first party hardware only**).
+DualSense, Switch Pro, and JoyCon controllers (it is recommended to use 1st party controllers, but some 3rd party controllers work fine too).
 
-This project is a fork of the work of Jays2Kings.
+This project is a fork of the work of Ryochan7 / Jays2Kings, taken Sept 2024.
 
 ![DS4Windows Preview](https://raw.githubusercontent.com/Ryochan7/DS4Windows/jay/ds4winwpf_screen_20200412.png)
 
