@@ -154,7 +154,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         }
         public event EventHandler CopilotEnabledChanged;
 
-        // GEP - Note the view model uses a 1-based index to be simpler for the user. The real model is 0 based.
+        // Note the ViewModel uses a 1-based index to be simpler for the user. The real model is 0 based.
         public int CopilotSourceIndex
         {
             get => (int)Global.CopilotSourceIndex+1;
@@ -169,7 +169,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         }
         public event EventHandler CopilotSourceIndexChanged;
 
-        // GEP - Note the view model uses a 1-based index to be simpler for the user. The real model is 0 based.
+        // Note the view model uses a 1-based index to be simpler for the user. The real model is 0 based.
         public int CopilotDestIndex
         {
             get => (int)Global.CopilotDestIndex+1;
