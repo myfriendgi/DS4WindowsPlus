@@ -80,6 +80,8 @@ namespace DS4Windows
         {
             if (!connected) return;
 
+            state = CopilotHelper.Instance.UpdateState(state, cont, device);
+
             //cont.ResetReport();
             ushort tempButtons = 0;
 
@@ -220,6 +222,8 @@ namespace DS4Windows
             {
                 cont.FeedbackReceived -= pair.Value;
             }
+
+            CopilotHelper.Instance.DisconnectController(cont);
 
             forceFeedbacksDict.Clear();
 

@@ -140,6 +140,50 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         }
         public event EventHandler AppChoiceIndexChanged;
 
+        public bool CopilotEnabled
+        {
+            get => Global.CopilotEnabled;
+            set
+            {
+                if (Global.CopilotEnabled != value)
+                {
+                    Global.CopilotEnabled = value;
+                    CopilotEnabledChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler CopilotEnabledChanged;
+
+        // GEP - Note the view model uses a 1-based index to be simpler for the user. The real model is 0 based.
+        public int CopilotSourceIndex
+        {
+            get => (int)Global.CopilotSourceIndex+1;
+            set
+            {
+                if ((int)Global.CopilotSourceIndex != value - 1)
+                {
+                    DS4Windows.Global.CopilotSourceIndex = value - 1;
+                    CopilotSourceIndexChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler CopilotSourceIndexChanged;
+
+        // GEP - Note the view model uses a 1-based index to be simpler for the user. The real model is 0 based.
+        public int CopilotDestIndex
+        {
+            get => (int)Global.CopilotDestIndex+1;
+            set
+            {
+                if ((int)Global.CopilotDestIndex != value-1)
+                {
+                    Global.CopilotDestIndex = value-1;
+                    CopilotDestIndexChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler CopilotDestIndexChanged;
+
         public bool CheckForUpdates
         {
             get => DS4Windows.Global.CheckWhen > 0;

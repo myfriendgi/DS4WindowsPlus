@@ -359,6 +359,9 @@ namespace DS4WinWPF.DS4Forms
             trayIconVM.RequestServiceChange += TrayIconVM_RequestServiceChange;
             settingsWrapVM.IconChoiceIndexChanged += SettingsWrapVM_IconChoiceIndexChanged;
             settingsWrapVM.AppChoiceIndexChanged += SettingsWrapVM_AppChoiceIndexChanged;
+            settingsWrapVM.CopilotEnabledChanged += SettingsWrapVM_CopilotSettingChanged;
+            settingsWrapVM.CopilotDestIndexChanged += SettingsWrapVM_CopilotSettingChanged;
+            settingsWrapVM.CopilotSourceIndexChanged += SettingsWrapVM_CopilotSettingChanged;
 
             autoProfControl.AutoDebugChanged += AutoProfControl_AutoDebugChanged;
             autoprofileChecker.RequestServiceChange += AutoprofileChecker_RequestServiceChange;
@@ -404,6 +407,11 @@ Suspend support not enabled.", true);
             App current = App.Current as App;
             current.ChangeTheme(choice);
             trayIconVM.PopulateContextMenu();
+        }
+
+        private void SettingsWrapVM_CopilotSettingChanged(object sender, EventArgs e)
+        {
+            CopilotHelper.Instance.UpdateCopilotConfig(Global.CopilotEnabled, Global.CopilotSourceIndex, Global.CopilotDestIndex);
         }
 
         private void SettingsWrapVM_IconChoiceIndexChanged(object sender, EventArgs e)

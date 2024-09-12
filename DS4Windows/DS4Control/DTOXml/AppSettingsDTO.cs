@@ -411,6 +411,26 @@ namespace DS4WinWPF.DS4Control.DTOXml
         } = BackingStore.DEFAULT_FLASH_WHEN_LATE_AT;
 
         [XmlIgnore]
+        public bool CopilotEnabled { get; private set; } = false;
+
+        [XmlElement("CopilotEnabled")]
+        public string CopilotEnabledString
+        {
+            get => CopilotEnabled.ToString();
+            set
+            {
+                if (bool.TryParse(value, out bool temp))
+                {
+                    CopilotEnabled = temp;
+                }
+            }
+        }
+
+        public int CopilotDestIndex { get; set; } = 0;
+
+        public int CopilotSourceIndex { get; set; } = 1;
+
+        [XmlIgnore]
         public TrayIconChoice AppIcon
         {
             get; private set;
@@ -815,6 +835,9 @@ namespace DS4WinWPF.DS4Control.DTOXml
             DownloadLang = source.downloadLang;
             FlashWhenLate = source.flashWhenLate;
             FlashWhenLateAt = source.flashWhenLateAt;
+            CopilotDestIndex = source.copilotDestIndex;
+            CopilotSourceIndex = source.copilotSourceIndex;
+            CopilotEnabled = source.copilotEnabled;
             AppIcon = source.useIconChoice;
             AppTheme = source.useCurrentTheme;
             UseOSCServer = source.useOSCServ;
@@ -908,6 +931,9 @@ namespace DS4WinWPF.DS4Control.DTOXml
             destination.downloadLang = DownloadLang;
             destination.flashWhenLate = FlashWhenLate;
             destination.flashWhenLateAt = FlashWhenLateAt;
+            destination.copilotDestIndex = CopilotDestIndex;
+            destination.copilotSourceIndex = CopilotSourceIndex;
+            destination.copilotEnabled = CopilotEnabled;
             destination.useIconChoice = AppIcon;
             destination.useCurrentTheme = AppTheme;
             destination.useOSCServ = UseOSCServer;

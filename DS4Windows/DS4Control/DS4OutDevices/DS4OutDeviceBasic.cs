@@ -36,6 +36,8 @@ namespace DS4Windows
         {
             if (!connected) return;
 
+            state = CopilotHelper.Instance.UpdateState(state, cont, device);
+
             //cont.ResetReport();
             ushort tempButtons = 0;
             DualShock4DPadDirection tempDPad = DualShock4DPadDirection.None;

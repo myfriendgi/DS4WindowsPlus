@@ -44,6 +44,7 @@ using System.Windows;
 using static DS4Windows.Util;
 using WpfScreenHelper;
 using DS4Windows.InputDevices;
+using DS4WinWPF.DS4Control;
 
 namespace DS4Windows
 {
@@ -1828,6 +1829,24 @@ namespace DS4Windows
         {
             get => m_Config.useCurrentTheme;
             set => m_Config.useCurrentTheme = value;
+        }
+
+        public static bool CopilotEnabled
+        {
+            set { m_Config.copilotEnabled = value; }
+            get { return m_Config.copilotEnabled; }
+        }
+
+        public static int CopilotSourceIndex
+        {
+            set { m_Config.copilotSourceIndex = value; }
+            get { return m_Config.copilotSourceIndex; }
+        }
+
+        public static int CopilotDestIndex
+        {
+            set { m_Config.copilotDestIndex = value; }
+            get { return m_Config.copilotDestIndex; }
         }
 
         public static bool UseCustomSteamFolder
@@ -3680,6 +3699,11 @@ namespace DS4Windows
         public bool useCustomSteamFolder;
         public string customSteamFolder;
         public AppThemeChoice useCurrentTheme;
+
+        public bool copilotEnabled = false;
+        public int copilotSourceIndex = 1;
+        public int copilotDestIndex = 0;
+
         public string fakeExeFileName = string.Empty;
         public string absDisplayEDID = string.Empty;
 
@@ -8208,6 +8232,8 @@ namespace DS4Windows
 
             udpSmoothingMincutoff = Math.Clamp(udpSmoothingMincutoff, 0.00001, 100.0);
             udpSmoothingBeta = Math.Clamp(udpSmoothingBeta, 0.0, 1.0);
+
+            CopilotHelper.Instance.UpdateCopilotConfig(copilotEnabled, copilotSourceIndex, copilotDestIndex);
         }
 
         public string UsedSavedProfileString(int index)

@@ -414,6 +414,21 @@
                             </ComboBox>
                         </StackPanel>
 
+                        <GroupBox Header="Copilot" BorderThickness="2" Margin="{StaticResource spaceMargin}" Padding="8" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox Content="Enable Copilot" VerticalAlignment="Center" IsChecked="{Binding CopilotEnabled}" Margin="0,0,0,4"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content=" From:"/>
+                                    <xctk:IntegerUpDown d:IsHidden="False" Height="20" x:Name="copilotSourceId" IsEnabled="{Binding CopilotEnabled}" Width="40"  Margin="8,0,0,0"
+                                        Value="{Binding CopilotSourceIndex, UpdateSourceTrigger=PropertyChanged,FallbackValue='2'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="8" Minimum="1" />
+                                    <Label Content="To:"/>
+                                    <xctk:IntegerUpDown d:IsHidden="False" Height="20" x:Name="copilotDestId" IsEnabled="{Binding CopilotEnabled}" Width="40"  Margin="0,0,0,0"
+                                        Value="{Binding CopilotDestIndex, UpdateSourceTrigger=PropertyChanged,FallbackValue='1'}" ButtonSpinnerLocation="Right" Increment="1" Maximum="8" Minimum="1" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+
                         <GroupBox Header="{lex:Loc Utils}" BorderThickness="2" Margin="{StaticResource spaceMargin}"
                               Padding="8" HorizontalAlignment="Left">
                             <WrapPanel HorizontalAlignment="Left" Orientation="Vertical">

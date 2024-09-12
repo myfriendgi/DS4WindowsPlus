@@ -60,6 +60,8 @@ namespace DS4Windows
             // Remove feedback handlers before Disconnect
             RemoveFeedbacks();
 
+            CopilotHelper.Instance.DisconnectController(cont);
+
             connected = false;
             cont.Disconnect();
             //cont.Dispose();
