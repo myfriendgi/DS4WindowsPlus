@@ -653,6 +653,7 @@ namespace DS4WinWPF.DS4Forms
             {
                 currentProfile = null;
                 PresetOptionWindow presetWin = new PresetOptionWindow();
+                presetWin.Owner = Application.Current.MainWindow;
                 presetWin.SetupData(deviceNum);
                 presetWin.ShowDialog();
                 if (presetWin.Result == MessageBoxResult.Cancel)
@@ -1500,7 +1501,15 @@ namespace DS4WinWPF.DS4Forms
         {
             if (mappingListVM.SelectedIndex >= 0)
             {
-                ShowControlBindingWindow();
+                var temp = System.Windows.Input.Mouse.DirectlyOver;
+
+                if (temp is Border border)
+                {
+                    if (border.TemplatedParent is ListBoxItem lvi)
+                    {
+                        ShowControlBindingWindow();
+                    }
+                }
             }
         }
 

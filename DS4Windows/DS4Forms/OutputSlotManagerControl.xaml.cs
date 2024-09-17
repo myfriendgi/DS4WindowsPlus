@@ -102,6 +102,7 @@ namespace DS4WinWPF.DS4Forms
             else
             {
                 PluginOutDevWindow devWindow = new PluginOutDevWindow();
+                devWindow.Owner = Application.Current.MainWindow;
                 devWindow.ShowDialog();
                 MessageBoxResult result = devWindow.Result;
                 if (result == MessageBoxResult.OK)

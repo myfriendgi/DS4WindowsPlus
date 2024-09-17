@@ -42,9 +42,26 @@ using DS4Windows;
 using DS4WinWPF.DS4Control;
 using DS4WinWPF.Translations;
 using H.NotifyIcon.Core;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DS4WinWPF.DS4Forms
 {
+    /*
+    public class SafeGridView : GridView
+    {
+        public SafeGridView() : base()
+        {
+            foreach (var gvcc in this.Columns)
+            {
+                var h = gvcc.Header as GridViewColumnHeader;
+                h.Siz
+
+            }
+        }
+        
+    }*/
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -350,7 +367,6 @@ namespace DS4WinWPF.DS4Forms
             conLvViewModel.ControllerCol.CollectionChanged += ControllerCol_CollectionChanged;
             AppLogger.TrayIconLog += ShowNotification;
             AppLogger.GuiLog += UpdateLastStatusMessage;
-            logvm.LogItems.CollectionChanged += LogItems_CollectionChanged;
             App.rootHub.Debug += UpdateLastStatusMessage;
             trayIconVM.RequestShutdown += TrayIconVM_RequestShutdown;
             trayIconVM.ProfileSelected += TrayIconVM_ProfileSelected;
@@ -427,22 +443,6 @@ Suspend support not enabled.", true);
         private void TrayIconVM_RequestServiceChange(object sender, EventArgs e)
         {
             ChangeService();
-        }
-
-        private void LogItems_CollectionChanged(object sender,
-            System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
-            {
-                Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    int count = logListView.Items.Count;
-                    if (count > 0)
-                    {
-                        logListView.ScrollIntoView(logvm.LogItems[count - 1]);
-                    }
-                }));
-            }
         }
 
         private void ControlServiceStarted(object sender, EventArgs e)
@@ -666,12 +666,12 @@ Suspend support not enabled.", true);
         {
             if (conLvViewModel.ControllerCol.Count == 0)
             {
-                controllerLV.Visibility = Visibility.Hidden;
+               // controllerLV.Visibility = Visibility.Hidden;
                 noContLb.Visibility = Visibility.Visible;
             }
             else
             {
-                controllerLV.Visibility = Visibility.Visible;
+               // controllerLV.Visibility = Visibility.Visible;
                 noContLb.Visibility = Visibility.Hidden;
             }
         }
@@ -834,6 +834,7 @@ Suspend support not enabled.", true);
 
         private void MainTabCon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            /* Why would we hide the status bar on the settings screen?
             if (mainTabCon.SelectedIndex == 4)
             {
                 lastMsgLb.Visibility = Visibility.Hidden;
@@ -841,7 +842,7 @@ Suspend support not enabled.", true);
             else
             {
                 lastMsgLb.Visibility = Visibility.Visible;
-            }
+            }*/
         }
 
         private void ProfilesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1605,6 +1606,8 @@ Suspend support not enabled.", true);
             profOptsToolbar.Visibility = Visibility.Visible;
             profilesListBox.Visibility = Visibility.Visible;
             preserveSize = true;
+
+            /*
             if (!editor.Keepsize)
             {
                 this.Width = oldSize.Width;
@@ -1614,6 +1617,7 @@ Suspend support not enabled.", true);
             {
                 oldSize = new Size(Width, Height);
             }
+            */
 
             editor = null;
             mainTabCon.SelectedIndex = 0;
@@ -1637,6 +1641,8 @@ Suspend support not enabled.", true);
                 preserveSize = false;
                 oldSize.Width = Width;
                 oldSize.Height = Height;
+
+                /* gep todo check/decide if this is ok
                 if (this.Width < DEFAULT_PROFILE_EDITOR_WIDTH)
                 {
                     this.Width = DEFAULT_PROFILE_EDITOR_WIDTH;
@@ -1645,7 +1651,7 @@ Suspend support not enabled.", true);
                 if (this.Height < DEFAULT_PROFILE_EDITOR_HEIGHT)
                 {
                     this.Height = DEFAULT_PROFILE_EDITOR_HEIGHT;
-                }
+                }*/
 
                 editor = new ProfileEditor(device);
                 editor.CreatedProfile += Editor_CreatedProfile;
@@ -1666,14 +1672,37 @@ Suspend support not enabled.", true);
             }
         }
 
+        // Double click used to minimuze
         private void NotifyIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            // Don't let double click close a window we literally just opened
+            var ts = new TimeSpan(DateTime.Now.Ticks - formLasthownTime.Ticks);
+            if (ts.Milliseconds < 250) return;
+
+            if (showAppInTaskbar && WindowState != WindowState.Minimized)
+            {
+                Activate();
+                WindowState = WindowState.Minimized;
+            }
+        }
+
+        DateTime formLasthownTime = new DateTime();
+
+        // Left click used to restore / bring to front
+        private void notifyIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
         {
             if (!showAppInTaskbar)
             {
+                formLasthownTime = DateTime.Now;
                 Show();
             }
 
-            WindowState = WindowState.Normal;
+            if (WindowState == WindowState.Minimized)
+            {
+                formLasthownTime = DateTime.Now;
+                WindowState = WindowState.Normal;
+            }
+            Activate();
         }
 
         private void ProfilesListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -1730,6 +1759,7 @@ Suspend support not enabled.", true);
         private void ChecklogViewBtn_Click(object sender, RoutedEventArgs e)
         {
             ChangelogWindow changelogWin = new ChangelogWindow();
+            changelogWin.Owner = this;
             changelogWin.ShowDialog();
         }
 
@@ -1756,6 +1786,7 @@ Suspend support not enabled.", true);
                     File.Exists(filename))
                 {
                     RenameProfileWindow renameWin = new RenameProfileWindow();
+                    renameWin.Owner = Application.Current.MainWindow;
                     renameWin.ChangeProfileName(entity.Name);
                     bool? result = renameWin.ShowDialog();
                     if (result.HasValue && result.Value)
@@ -1765,6 +1796,37 @@ Suspend support not enabled.", true);
                     }
                 }
             }
+        }
+
+        // this is a hack to stop the stop the grid view header columns being resized so small that
+        // you can't get them back. Tag can be used to specify the minimum column width
+        private void GridViewColumnHeader_SizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
+        {
+            var gvch = ((GridViewColumnHeader)sender);
+            var minWidthString = gvch.Tag as string;
+            var minWidth = 30;
+            int.TryParse(minWidthString, out minWidth);
+            
+            if (sizeChangedEventArgs.NewSize.Width <= minWidth)
+            {
+                sizeChangedEventArgs.Handled = true;
+                gvch.Column.Width = minWidth;
+            }
+        }
+
+        private void GridViewColumnHeader_SizeChanged_1(object sender, SizeChangedEventArgs e)
+        {
+
+        }
+
+        private void mainTabCon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 

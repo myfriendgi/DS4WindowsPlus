@@ -9,6 +9,7 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="{lex:Loc Welcome.WinTitle}" Height="440" Width="418" MinWidth="500" MinHeight="500"
         Style="{DynamicResource WindowStyle}">
     <Window.Resources>

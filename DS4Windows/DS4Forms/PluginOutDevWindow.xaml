@@ -9,16 +9,18 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        Title="PluginOutDevWindow" Height="200" Width="400"
+        ResizeMode="NoResize"
+        Title="PluginOutDevWindow" Height="165" Width="250"
+        WindowStartupLocation="CenterOwner"
         Style="{DynamicResource WindowStyle}">
-    <DockPanel LastChildFill="False">
-        <TextBlock Text="{lex:Loc DeviceType}" DockPanel.Dock="Top" />
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="40" HorizontalAlignment="Right">
-            <Button x:Name="acceptBtn" Content="{lex:Loc Accept}" Click="AcceptBtn_Click" />
-            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Margin="20,0,0,0" />
+    <DockPanel LastChildFill="False" Margin="8">
+        <TextBlock Text="{lex:Loc DeviceType}" DockPanel.Dock="Top" Margin="0,0,0,8"/>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="22" HorizontalAlignment="Right">
+            <Button x:Name="acceptBtn" Content="{lex:Loc Accept}" Click="AcceptBtn_Click" Padding="8,0,8,0"/>
+            <Button x:Name="cancelBtn" Content="{lex:Loc Cancel}" Click="CancelBtn_Click" Padding="8,0,8,0" Margin="8,0,0,0" />
         </StackPanel>
 
-        <ComboBox x:Name="devTypeCombo" SelectedIndex="0" DockPanel.Dock="Top">
+        <ComboBox x:Name="devTypeCombo" SelectedIndex="0" DockPanel.Dock="Top" Margin="0,0,0,8">
             <ComboBoxItem Tag="0" Content="X360" />
             <ComboBoxItem Tag="1" Content="DS4" />
         </ComboBox>

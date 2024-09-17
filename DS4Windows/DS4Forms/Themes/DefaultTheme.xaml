@@ -2,12 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:DS4WinWPF.DS4Forms.Themes" xmlns:system="clr-namespace:System;assembly=mscorlib">
     <!-- Brushes -->
+
     <SolidColorBrush x:Key="ForegroundColor" Color="{x:Static SystemColors.ActiveCaptionTextColor}" />
     <SolidColorBrush x:Key="SecondaryColor" Color="{x:Static SystemColors.ControlColor}"  />
-    <SolidColorBrush x:Key="AccentColor" Color="#FF0066CC" />
+    <SolidColorBrush x:Key="AccentColor" Color="#FF0066CC" /> 
     <SolidColorBrush x:Key="BorderColor" Color="#FFC8C8C8" />
     <SolidColorBrush x:Key="BackgroundColor" Color="{x:Static SystemColors.WindowColor}"/>
+    <SolidColorBrush x:Key="RowHighlightColor" Color="#DEEFFF" />
 
+    
     <system:String x:Key="KeyImageImg">key-solid.png</system:String>
     <system:String x:Key="CancelImg">cancel.png</system:String>
     <system:String x:Key="CheckedImg">checked.png</system:String>
@@ -27,5 +30,63 @@
 
     <system:String x:Key="GitHubImg">GitHub-Mark-64px.png</system:String>
 
-    <Style x:Key="WindowStyle" TargetType="{x:Type Window}" />
+    <Style x:Key="WindowStyle" TargetType="{x:Type Window}"/>
+
+    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}"></Style>
+
+    <Style x:Key="GridViewColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}"/>
+
+
+    <!-- gep 
+
+
+
+     GridViewColumnHeader style 
+    <Style x:Key="GridViewColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                    <Border BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderColor}">
+                        <Grid Background="{TemplateBinding Background}" MinWidth="{TemplateBinding MinWidth}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Thumb x:Name="PART_HeaderGripper" Grid.Column="1">
+                                <Thumb.Width>1</Thumb.Width>
+                            </Thumb>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Role" Value="Padding">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Border Background="{TemplateBinding Background}" Margin="0,0,-2,0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource BorderColor}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    -->
+
+
+    <!-- Now apply custom styles -->
+    <Style BasedOn="{StaticResource WindowStyle}" TargetType="{x:Type Window}" />
+    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="{x:Type ListViewItem}" />
+    <Style BasedOn="{StaticResource GridViewColumnHeaderStyle}" TargetType="{x:Type GridViewColumnHeader}" />
+
 </ResourceDictionary>

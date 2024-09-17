@@ -46,6 +46,11 @@ namespace DS4WinWPF.DS4Forms
 
         private void SourceLink_Click(object sender, RoutedEventArgs e)
         {
+            Util.StartProcessHelper("https://github.com/myfriendgi/DS4WindowsPlus");
+        }
+
+        private void Ryochan7_Click(object sender, RoutedEventArgs e)
+        {
             Util.StartProcessHelper("https://github.com/Ryochan7/DS4Windows");
         }
 

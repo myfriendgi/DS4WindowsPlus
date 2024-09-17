@@ -452,7 +452,7 @@ Esimerkki: Whyme_DS4Windows</value>
     <value>HidPiilota</value>
   </data>
   <data name="HidHideConfigClient" xml:space="preserve">
-    <value>HidHide Configuration Client</value>
+    <value>HidHide Configuration</value>
   </data>
   <data name="ExclusiveAccess" xml:space="preserve">
     <value>Ainutlaatuinen pääsy</value>
@@ -679,7 +679,7 @@ Liikuntarajoitteinen:
   <data name="EnableInterpretingOscMonitoring" xml:space="preserve">
     <value>Tulkitse Valvontaviestit</value>
   </data>
-    <data name="EnableOscSender" xml:space="preserve">
+  <data name="EnableOscSender" xml:space="preserve">
     <value>Ota Valvontapalvelu Käyttöön</value>
   </data>
   <data name="ControllerSupportDS4" xml:space="preserve">

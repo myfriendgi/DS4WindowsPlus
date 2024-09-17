@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accel" xml:space="preserve">
     <value>Pecutan</value>
@@ -437,7 +437,7 @@ Contoh: whyme_DS4Windows</value>
     <value>Penentukuran Dunia Sebenar</value>
   </data>
   <data name="ViGEmPluginFailure" xml:space="preserve">
-      <value>Pemalam Peranti ViGEm Gagal. Kod Ralat {0}. Mungkin masalah dalaman ViGEmBus. Menutup sambungan. Jika isu berterusan, sila tutup DS4Windows dan kemudian but semula Windows.</value>
+    <value>Pemalam Peranti ViGEm Gagal. Kod Ralat {0}. Mungkin masalah dalaman ViGEmBus. Menutup sambungan. Jika isu berterusan, sila tutup DS4Windows dan kemudian but semula Windows.</value>
   </data>
   <data name="CRC32Fail" xml:space="preserve">
     <value>Pemeriksaan integriti data gagal untuk peranti nirwayar. Menutup peranti.</value>
@@ -452,7 +452,7 @@ Contoh: whyme_DS4Windows</value>
     <value>HidHide</value>
   </data>
   <data name="HidHideConfigClient" xml:space="preserve">
-    <value>Klien Konfigurasi HidHide</value>
+    <value>Konfigurasi HidHide</value>
   </data>
   <data name="ExclusiveAccess" xml:space="preserve">
     <value>Akses Eksklusif</value>
@@ -694,7 +694,7 @@ Dilumpuhkan:
   <data name="ControllerSupportSwitchPro" xml:space="preserve">
     <value>Sokongan Alat Kawalan SwitchPro</value>
   </data>
-  <data name="Copycat" xml:space="preserve">              
+  <data name="Copycat" xml:space="preserve">
     <value>Peniru</value>
   </data>
   <data name="CopycatTip" xml:space="preserve">

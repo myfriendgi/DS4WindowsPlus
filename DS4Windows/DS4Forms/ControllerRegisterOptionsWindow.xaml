@@ -10,12 +10,13 @@
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
         Title="{lex:Loc ControllerRegOptWin.WinTitle}" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner"
         Style="{DynamicResource WindowStyle}" Closed="Window_Closed">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
-    <DockPanel x:Name="devOptionsDockPanel" Margin="4">
-        <DockPanel>
+    <DockPanel x:Name="devOptionsDockPanel" Margin="8">
+        <DockPanel MinWidth="200">
             <StackPanel DockPanel.Dock="Top">
                 <CheckBox Content="{lex:Loc ControllerSupportDS4}" IsChecked="{Binding DS4DeviceOpts.Enabled}" />
                 <CheckBox Content="{lex:Loc ControllerSupportDualSense}" IsChecked="{Binding DSDeviceOpts.Enabled}" />
@@ -28,10 +29,10 @@
                 <CheckBox Content="{lex:Loc EnableVerboseLog}" IsChecked="{Binding VerboseLogMessages}" ToolTip="{lex:Loc EnableVerboseLogTip}"/>
             </StackPanel>
             
-            <DockPanel DockPanel.Dock="Bottom" Margin="0,20,0,0">
+            <DockPanel DockPanel.Dock="Bottom" Margin="0,16,0,0">
                 <Label Content="{lex:Loc DetectedControllers}" ContentStringFormat="{}{0}:" DockPanel.Dock="Top" FontWeight="Bold" />
                 <ListBox x:Name="controllerListBox" ItemsSource="{Binding CurrentInputDevices}" SelectedIndex="{Binding ControllerSelectedIndex}"
-                      Margin="0,8,0,0">
+                      Margin="0,4,0,0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding IdText}" />
@@ -42,7 +43,7 @@
             
         </DockPanel>
 
-        <TabControl x:Name="deviceSettingsTabControl" DockPanel.Dock="Right" SelectedIndex="{Binding CurrentTabSelectedIndex}" Margin="40,4,4,4">
+        <TabControl x:Name="deviceSettingsTabControl" DockPanel.Dock="Right" SelectedIndex="{Binding CurrentTabSelectedIndex}" Margin="8,-5,0,0">
             <TabItem Header="Blank" Visibility="Collapsed">
             </TabItem>
 

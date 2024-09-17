@@ -397,6 +397,15 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         public delegate void FakeExeNameChangeHandler(SettingsViewModel sender,
             string oldvalue, string newvalue);
 
+        public bool XInputCheckerFound
+        {
+            get
+            {
+                string path = Path.Combine(Global.exedirpath, "Tools", "XInputChecker", "XInputChecker.exe");
+                return File.Exists(path);
+            }
+        }
+        public event EventHandler XInputCheckerFoundChanged;
 
         public bool HidHideClientFound
         {

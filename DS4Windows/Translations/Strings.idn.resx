@@ -450,7 +450,7 @@ Perubahan pada opsi ini berlaku saat kontroler terhubung</value>
     <value>HidHide</value>
   </data>
   <data name="HidHideConfigClient" xml:space="preserve">
-    <value>Klien Konfigurasi HidHide</value>
+    <value>Konfigurasi HidHide</value>
   </data>
   <data name="ExclusiveAccess" xml:space="preserve">
     <value>Akses Eksklusif</value>

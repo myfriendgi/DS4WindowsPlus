@@ -296,7 +296,7 @@ namespace DS4WinWPF.DS4Forms
                     }
                     else if (interState.L2 == 0)
                     {
-                        l2ValLbBrush.Color = Colors.Red;
+                        l2ValLbBrush.Color = Colors.Black;
                     }
                     else
                     {
@@ -311,7 +311,7 @@ namespace DS4WinWPF.DS4Forms
                     }
                     else if (interState.R2 == 0)
                     {
-                        r2ValLbBrush.Color = Colors.Red;
+                        r2ValLbBrush.Color = Colors.Black;
                     }
                     else
                     {

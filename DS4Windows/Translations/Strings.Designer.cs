@@ -1026,7 +1026,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force usage of both % strength levels (General and DualSense specifc).
+        ///   Looks up a localized string similar to Force usage of both % strength levels.
         /// </summary>
         public static string DualSRumbleForceGenericRescale {
             get {
@@ -1075,7 +1075,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rumble mode and strength level:.
+        ///   Looks up a localized string similar to Rumble mode and strength:.
         /// </summary>
         public static string DualSRumbleModeNPowerLevelTxt {
             get {
@@ -1667,7 +1667,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HidHide Configuration Client.
+        ///   Looks up a localized string similar to HidHide Configuration.
         /// </summary>
         public static string HidHideConfigClient {
             get {
@@ -2408,11 +2408,20 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DS4 Trigger Output Mode.
+        ///   Looks up a localized string similar to DS4 Trigger Mode.
         /// </summary>
         public static string ProfileEditor_VirtualDS4TrigOutput {
             get {
                 return ResourceManager.GetString("ProfileEditor.VirtualDS4TrigOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ProfileEditor_VirtualTrigButtonOutput {
+            get {
+                return ResourceManager.GetString("ProfileEditor.VirtualTrigButtonOutput", resourceCulture);
             }
         }
         
@@ -2498,7 +2507,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SixAxis: X Axis is flipped so it is easier to read.
+        ///   Looks up a localized string similar to Six Axis.
         /// </summary>
         public static string ReadingsControl_SixAxisXText {
             get {
@@ -2886,7 +2895,7 @@ namespace DS4WinWPF.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected Profile.
+        ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string SelectedProfile {
             get {

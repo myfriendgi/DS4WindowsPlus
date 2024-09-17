@@ -62,6 +62,16 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         }
         public event EventHandler SidePanelVisibilityChanged;
 
+        // Why does binding to this even work?
+        public bool EnableDynamicModeButtons
+        {
+            get
+            {
+                return SidePanelVisibility == Visibility.Visible;
+            }
+        }
+        public event EventHandler EnableDynamicModeButtonsChanged;
+
         public bool PluginEnabled
         {
             get
@@ -135,6 +145,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
         private void CurrentOutDeviceViewModel_SelectedIndexChanged(object sender,
             EventArgs e)
         {
+            EnableDynamicModeButtonsChanged?.Invoke(this, EventArgs.Empty);
             SidePanelVisibilityChanged?.Invoke(this, EventArgs.Empty);
             PluginEnabledChanged?.Invoke(this, EventArgs.Empty);
             UnpluginEnabledChanged?.Invoke(this, EventArgs.Empty);
@@ -184,6 +195,7 @@ namespace DS4WinWPF.DS4Forms.ViewModels
 
         private void RefreshPanels()
         {
+            EnableDynamicModeButtonsChanged?.Invoke(this, EventArgs.Empty);
             SidePanelVisibilityChanged?.Invoke(this, EventArgs.Empty);
             PluginEnabledChanged?.Invoke(this, EventArgs.Empty);
             UnpluginEnabledChanged?.Invoke(this, EventArgs.Empty);

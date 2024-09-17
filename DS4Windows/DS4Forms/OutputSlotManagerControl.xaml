@@ -13,61 +13,79 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
-    <DockPanel Margin="4,8">
-        <StackPanel x:Name="plugDevStackPanel" Orientation="Horizontal" DockPanel.Dock="Bottom" Height="30" Margin="0,20,0,0">
-            <Button x:Name="pluginBtn" MinWidth="60" Content="{lex:Loc Plug}" IsEnabled="{Binding PluginEnabled}" Click="PluginBtn_Click" />
-            <Button x:Name="unplugBtn" MinWidth="60" Content="{lex:Loc Unplug}" IsEnabled="{Binding UnpluginEnabled}" Click="UnplugBtn_Click" Margin="30,0,0,0" />
-        </StackPanel>
+    <DockPanel Margin="-3,-3,-3, 0">
 
-        <DockPanel>
-            <StackPanel x:Name="sideStackPanel" Orientation="Vertical" Width="100" DockPanel.Dock="Right" Visibility="{Binding SidePanelVisibility}" Margin="10,0,10,0">
-                <StackPanel x:Name="outSlotStackPanel">
-                    <ComboBox x:Name="reserveCombo" SelectedIndex="{Binding ReserveChoice,FallbackValue=0}">
+        <DockPanel Margin="10,8,0,8" x:Name="plugDevStackPanel" DockPanel.Dock="Bottom" Height="22">
+            <Button x:Name="pluginBtn" MinWidth="90" Content="{lex:Loc Plug}" IsEnabled="{Binding PluginEnabled}" Click="PluginBtn_Click" />
+            <Button x:Name="unplugBtn" MinWidth="90" Content="{lex:Loc Unplug}" IsEnabled="{Binding UnpluginEnabled}" Click="UnplugBtn_Click" Margin="8,0,0,0" />
+            <DockPanel LastChildFill="False" x:Name="sideStackPanel" DockPanel.Dock="Right" IsEnabled="{Binding EnableDynamicModeButtons}" Margin="8,0,10,0">
+                <StackPanel DockPanel.Dock="Left" x:Name="outSlotStackPanel" Orientation="Horizontal">
+                    <ComboBox Height="22" MinWidth="90" x:Name="reserveCombo" SelectedIndex="{Binding ReserveChoice,FallbackValue=0}">
                         <ComboBoxItem Tag="0" Content="{lex:Loc Dynamic}" />
                         <ComboBoxItem Tag="1" Content="{lex:Loc Permanent}" />
                     </ComboBox>
-
                     <Button x:Name="slotChangeAcceptBtn" Content="{lex:Loc Accept}" IsEnabled="{Binding Dirty,FallbackValue=False}"
-                            Click="SlotChangeAcceptBtn_Click" Margin="0,8,0,0" />
+                            Click="SlotChangeAcceptBtn_Click" Height="22" MinWidth="90" Margin="8,0,0,0" />
                 </StackPanel>
-            </StackPanel>
-            <ListView x:Name="currentOutDevLV" ItemsSource="{Binding SlotDeviceEntries}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" DockPanel.Dock="Top">
+            </DockPanel>
+
+        </DockPanel>
+
+        <Border Height=".8" Margin="0,0,0,1" DockPanel.Dock="Bottom" SnapsToDevicePixels="True" Background="{DynamicResource BorderColor}"/>
+
+        <DockPanel>
+
+            <ListView x:Name="currentOutDevLV" Margin="-3,1,-3,0" ItemsSource="{Binding SlotDeviceEntries}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" BorderThickness="0" DockPanel.Dock="Top">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemStyle}">
+                        <!--BasedOn="{StaticResource ListViewItemStyle}"> -->
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="DataContext" Value="Center"/>
+                        <Setter Property="Height" Value="37"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="100" Header="{lex:Loc OutputSlotMan.InputNum}">
+                    <GridView AllowsColumnReorder="False">
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                <!-- BasedOn="{StaticResource GridViewColumnHeaderStyle}"-->
+                                <Setter Property="Height" Value="29"></Setter>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+
+                        <GridViewColumn Width="340" Header="{lex:Loc OutputSlotMan.InputNum}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding InputSlotDisplayString}" />
-                                    <!--<CheckBox IsChecked="{Binding BoundInput,Mode=OneWay}" IsEnabled="False" />-->
+                                    <TextBlock TextAlignment="Center" Text="{Binding InputSlotDisplayString}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" Header="{lex:Loc Current}">
+                        <GridViewColumn Width="120" Header="{lex:Loc Current}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding CurrentType}" />
+                                    <TextBlock TextAlignment="Center" Text="{Binding CurrentType}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="200" Header="{lex:Loc Requested}">
+                        <GridViewColumn Width="120" Header="{lex:Loc Requested}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding DesiredType}" />
+                                    <TextBlock TextAlignment="Center" Text="{Binding DesiredType}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="60" Header="{lex:Loc OutputSlotMan.XInputNum}">
+                        <GridViewColumn Width="120" Header="{lex:Loc OutputSlotMan.XInputNum}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding XInputSlotNum}" Visibility="{Binding DisplayXInputSlotNum, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
-                                    <!--<CheckBox IsChecked="{Binding BoundInput,Mode=OneWay}" IsEnabled="False" />-->
+                                    <TextBlock TextAlignment="Center" Text="{Binding XInputSlotNum}" Visibility="{Binding DisplayXInputSlotNum, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="60" Header="{lex:Loc Active}">
+                        <GridViewColumn Width="120" Header="{lex:Loc Active}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding BoundInput,Mode=OneWay}" IsEnabled="False" />
+                                    <CheckBox HorizontalAlignment="Center" IsChecked="{Binding BoundInput,Mode=OneWay}" IsEnabled="False" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

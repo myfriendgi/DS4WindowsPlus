@@ -231,12 +231,21 @@ namespace DS4WinWPF
 
             // Have app use selected culture
             SetUICulture(DS4Windows.Global.UseLang);
-            DS4Windows.AppThemeChoice themeChoice = DS4Windows.Global.UseCurrentTheme;
-            ChangeTheme(DS4Windows.Global.UseCurrentTheme, false);
-
+            
+            //gep DS4Windows.AppThemeChoice themeChoice = DS4Windows.Global.UseCurrentTheme;
+            //gep ChangeTheme(DS4Windows.Global.UseCurrentTheme, false);
+            
             DS4Windows.Global.LoadLinkedProfiles();
             DS4Forms.MainWindow window = new DS4Forms.MainWindow(parser);
-            MainWindow = window;
+            MainWindow = window;    
+
+            //gep change required here to get style working properly?
+            window.Loaded += (a, b) =>
+            {
+                DS4Windows.AppThemeChoice themeChoice = DS4Windows.Global.UseCurrentTheme;
+                ChangeTheme(DS4Windows.Global.UseCurrentTheme, true);
+            };
+
             window.IsInitialShow = true;
             window.Show();
             window.IsInitialShow = false;

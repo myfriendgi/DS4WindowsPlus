@@ -9,9 +9,9 @@
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
-        Title="{lex:Loc SaveWhere.WinTitle}" Height="184" Width="453" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
+        Title="{lex:Loc SaveWhere.WinTitle}" Height="204" Width="493" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
         Style="{DynamicResource WindowStyle}">
-    <StackPanel>
+    <StackPanel Margin="10">
         <DockPanel x:Name="multipleSavesDockP" Margin="4,0">
             <Label Content="{lex:Loc SaveWhere.MultipleSaves}" />
             <CheckBox x:Name="dontDeleteCk" Content="{lex:Loc SaveWhere.DontDelete}" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" />
@@ -19,12 +19,12 @@
         <TextBlock x:Name="pickWhereTxt" Text="{lex:Loc SaveWhere.PickWhere}"
                    TextWrapping="Wrap" HorizontalAlignment="Center" Margin="4,10,4,0" TextAlignment="Center" />
         <DockPanel Margin="4,10,4,0">
-            <StackPanel x:Name="progFolderPanel" Width="200">
+            <StackPanel x:Name="progFolderPanel" Width="220">
                 <Button x:Name="progFolderBtn" Content="{lex:Loc ProgramFolder}" Click="ProgFolderBtn_Click" />
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="{lex:Loc SaveWhere.ProgramFolderDescText}">
                 </TextBlock>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Width="200">
+            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Width="220">
                 <Button x:Name="appdataBtn" Content="{lex:Loc Appdata}" Click="AppdataBtn_Click" />
                 <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                            Text="{lex:Loc SaveWhere.AppDataDescText}">

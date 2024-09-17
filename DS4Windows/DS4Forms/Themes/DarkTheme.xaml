@@ -8,9 +8,16 @@
     <!-- Brushes -->
     <SolidColorBrush x:Key="BackgroundColor" Color="#FF202020" />
     <SolidColorBrush x:Key="BorderColor" Color="#FF3F3F46" />
-    <SolidColorBrush x:Key="ForegroundColor" Color="White" />
-    <SolidColorBrush x:Key="SecondaryColor" Color="#FF2d5a8c" />
-    <SolidColorBrush x:Key="AccentColor" Color="#FF007ACC" />
+    <SolidColorBrush x:Key="ForegroundColor" Color="#eeeeee" /> <!-- pure white would be too bright for this -->
+    <SolidColorBrush x:Key="SecondaryColorX" Color="#aa2d5a8c" />
+    <SolidColorBrush x:Key="AccentColorX" Color="#FF2d5a8c" />
+    <SolidColorBrush x:Key="RowHighlightColor" Color="#2d5a8c" />
+
+    <SolidColorBrush x:Key="SecondaryColor" Color="#2F4154" />
+    <SolidColorBrush x:Key="AccentColor" Color="#2d5a8c" />
+    <SolidColorBrush x:Key="AccentColorBright" Color="#4977A3" />
+    
+
 
     <system:String x:Key="KeyImageImg">key-solid_white.png</system:String>
     <system:String x:Key="CancelImg">cancel_white.png</system:String>
@@ -288,7 +295,7 @@
                         <Border Padding="0,2,0,0">
                             <TabPanel IsItemsHost="True"/>
                         </Border>
-                        <Border BorderThickness="0,2,0,0" BorderBrush="{StaticResource AccentColor}" Grid.Row="1">
+                        <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource AccentColor}" Grid.Row="1">
                             <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource BorderColor}">
                                 <Grid Margin="0,5,0,0">
                                     <ContentPresenter x:Name="PART_Presenter" ContentSource="SelectedContent" HorizontalAlignment="Stretch"/>
@@ -319,7 +326,7 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Border BorderBrush="Transparent" Width="{TemplateBinding Width}" 
                                     Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
-                        <TextBlock Text="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}"/>
+                        <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -335,6 +342,13 @@
                                 <Condition Property="IsSelected" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="Transparent"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -446,10 +460,10 @@
     </Style>
 
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
-        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -483,13 +497,13 @@
     <!-- ListViewItem style -->
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="2,0" />
+        <Setter Property="Padding" Value="0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                     <Grid>
                         <Border x:Name="innerBorder" 
-                                Background="{TemplateBinding Background}" 
+                                Background="{DynamicResource BackgroundColor}" 
                                 Padding="{TemplateBinding Padding}" 
                                 SnapsToDevicePixels="true" />
                         <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
@@ -497,10 +511,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="innerBorder" Property="Background" Value="{StaticResource SecondaryColor}"/>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{DynamicResource SecondaryColor}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="innerBorder" Property="Background" Value="{StaticResource AccentColor}"/>
+                            <Setter TargetName="innerBorder" Property="Background" Value="{DynamicResource  RowHighlightColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -508,27 +522,24 @@
         </Setter>
     </Style>
 
-    <!-- GridViewColumnHeader style -->
     <Style x:Key="GridViewColumnHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
-        <Setter Property="Height" Value="22"/>
-        <Setter Property="MinWidth" Value="30"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                    <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource BorderColor}">
-                        <Grid Background="{TemplateBinding Background}" MinWidth="{TemplateBinding MinWidth}">
+                    <Border Background="{DynamicResource BackgroundColor}" BorderThickness="0,0,0,1" Margin="-2,0" BorderBrush="{DynamicResource BorderColor}">
+                        <Grid MinWidth="{TemplateBinding MinWidth}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2"/>
+                                <ColumnDefinition Width="6"/>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Thumb x:Name="PART_HeaderGripper" Grid.Column="1"/>
+                            <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Thumb x:Name="PART_HeaderGripper" Background="{DynamicResource BorderColor}" Grid.Column="1" Opacity=".01" />
+                            <Border Grid.Column="1" IsHitTestVisible="False" Background="{DynamicResource BorderColor}" Width="1" HorizontalAlignment="Right"></Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+                            <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -539,7 +550,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewColumnHeader">
-                            <Border Background="{TemplateBinding Background}" Margin="0,0,-2,0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource BorderColor}"/>
+                            <Border  Margin="-2,0"  BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderColor}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -1044,7 +1055,7 @@
                                 </Trigger>
                                 <Trigger Property="IsHighlighted" Value="True">
                                     <Setter Property="BorderBrush" TargetName="Border" Value="#80DADADA"/>
-                                    <Setter Property="Background" TargetName="Border" Value="{StaticResource AccentColor}"/>
+                                    <Setter Property="Background" TargetName="Border" Value="{DynamicResource AccentColor}"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

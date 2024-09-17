@@ -35,6 +35,9 @@ using System.ComponentModel;
 using Ookii.Dialogs.Wpf;
 using DS4WinWPF.DS4Forms.ViewModels;
 using Microsoft.Win32;
+using System.Collections.Specialized;
+using System.Collections;
+using System.Windows.Controls.Primitives;
 
 namespace DS4WinWPF.DS4Forms
 {
@@ -62,6 +65,9 @@ namespace DS4WinWPF.DS4Forms
         {
             InitializeComponent();
 
+            // Stop anonying warning triangle icon appearing in WPF designer mode.
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
             if (!File.Exists(DS4Windows.Global.appdatapath + @"\Auto Profiles.xml"))
                 DS4Windows.Global.CreateAutoProfiles(m_Profile);
 
@@ -86,6 +92,33 @@ namespace DS4WinWPF.DS4Forms
                 {
                     autoProfilesGrid.RowDefinitions.RemoveAt(i);
                 }
+            }
+
+            Loaded += AutoProfiles_Loaded;
+            ((INotifyCollectionChanged)programListLV.Items).CollectionChanged += AutoProfiles_CollectionChanged;
+        }
+
+        private void AutoProfiles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // This autosizes the columns to fit the contents when a new log item is added
+            foreach (GridViewColumn c in ((GridView)programListLV.View).Columns)
+            {
+                if (double.IsNaN(c.Width))
+                {
+                    c.Width = c.ActualWidth;
+                }
+                c.Width = double.NaN;
+            }
+        }
+
+        private void AutoProfiles_Loaded(object sender, RoutedEventArgs e)
+        {
+            // not really sure why this is not scrolled to top by default,
+            // but let's just do that manually, one time only.
+            if (sidebarScrollViewer.ActualHeight > 0)
+            {
+                sidebarScrollViewer.ScrollToTop();
+                // Loaded -= AutoProfiles_Loaded;
             }
         }
 
@@ -304,6 +337,9 @@ namespace DS4WinWPF.DS4Forms
 
         private void AddProgramsBtn_Click(object sender, RoutedEventArgs e)
         {
+            addProgramsBtn.ContextMenu.Placement = PlacementMode.Left;
+            addProgramsBtn.ContextMenu.PlacementRectangle = new Rect(0, (sender as Button).ActualHeight, 0,0);
+            addProgramsBtn.ContextMenu.PlacementTarget = sender as UIElement;
             addProgramsBtn.ContextMenu.IsOpen = true;
             e.Handled = true;
         }
@@ -384,6 +420,21 @@ namespace DS4WinWPF.DS4Forms
             {
                 if(autoProfVM.MoveItemUpDown(autoProfVM.SelectedItem, ((sender as MenuItem).Name == "MoveUp") ? -1 : 1))
                     autoProfVM.AutoProfileHolder.Save(DS4Windows.Global.appdatapath + @"\Auto Profiles.xml");
+            }
+        }
+
+        private void GridViewColumnHeader_SizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
+        {
+            // gep todo don't keep duplicate this code, put in in a shared function or class or attached property or something
+            var gvch = ((GridViewColumnHeader)sender);
+            var minWidthString = gvch.Tag as string;
+            var minWidth = 30;
+            int.TryParse(minWidthString, out minWidth);
+
+            if (sizeChangedEventArgs.NewSize.Width <= minWidth)
+            {
+                sizeChangedEventArgs.Handled = true;
+                gvch.Column.Width = minWidth;
             }
         }
     }

@@ -1,0 +1,37 @@
+todo / done
+
+/ Auto profiles, right section needs to have fixed width, left should grow
+/ shrink or pad the icons down a bit.
+
+auto prof - 'No programs added yet' text for placeholder.
+
+/ Set Six Axis... text to shot, just 2 words.
+/ set min size for LB & Rel Mouse   Select action for  controller window
+/ Minimum size for remaining grid views
+
+Would be nice to replace the profile list screen with the profile editor screen, what is the point of both? The editor would need a profile selector combobox. A way to new/rename/duplciate/delete, etc., mark unsaved changes, hook up to a meaningful controller numbe for testing sticks etc. If you don't do it, the profile list screen still needs work, e.g. rename function is weird, style should be like a gridview style, etc.
+
+/ something screwed in controller profile edit view. Probably to do with tring to improve bar at
+the top of the shared profile list tab. need to revert these changes.
+
+/ - split settings into 3 columns, allow 3rd one to stretch slightly. This is to help different languages like german to fit nicely too.
+
+/ - margin/pad out left of time and message contents in log view slightly, e.g. 4
+
+/ - different color for 1/2 selected tab
+
+- sort styles out so that 1st (dark) is always loaded and 2nd (light) is added (default) and toggled on and off while the other remains. This has got to be a more correct way of styling.
+
+/ - try and improve thick blue underline if possible (top of dark mode, under menu items).
+
+- unify styles
+
+- dark mode hyper link text not showing up well
+
+- hyperlinks mouse over effect
+
+/ - controller readings needs scroll bar
+
+/ stick deadzones etc to update immediately when numbers are entered
+
+/ Controllers tab, would love to shift header to the right a bit

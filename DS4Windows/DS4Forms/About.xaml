@@ -6,36 +6,39 @@
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         mc:Ignorable="d"
-        Title="{lex:LocExtension HotkeysAbout}" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner"
+        Title="{lex:LocExtension HotkeysAbout}" Height="470" Width="650" MinWidth="650" MinHeight="220"
         Style="{DynamicResource WindowStyle}">
     <DockPanel>
-        <Label x:Name="headerLb" Content="DS4Windows - Ryochan7 Build (Version " DockPanel.Dock="Top" HorizontalAlignment="Center" />
+        <Label x:Name="headerLb" Content="DS4Windows - Ryochan7 Build (Version " DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,0,0,8"/>
         
-        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,4,0,0">
-            <Hyperlink x:Name="changeLogLink" Click="ChangeLogLink_Click" Foreground="{DynamicResource AccentColor}">Changelog</Hyperlink>
-        </TextBlock>
         <TabControl>
             <TabItem Header="Hotkeys">
-                <TextBlock TextWrapping="Wrap" xml:space="preserve">Hide DS4 Controller: Hides the DS4's regular input (Dinput) from other programs, check if you are getting double input in games or R2 pauses games
-Click left side of touchpad: Left Touch
-Click right side of touchpad: Right Touch
-Click touchpad with 2 fingers: Multitouch
-Click upper part of touchpad: Upper Touch
-PS + Options or hold PS for 10 secs: Disconnect Controller (Only on Bluetooth)
-Touch Touchpad + PS: Turn off touchpad movement (clicking still works)
-Pad click on lower right: Right click (Best used when right side is used as a mouse button)
-Two fingers up/down on touchpad*: Scroll Up/Down
-Tap then hold touchpad*: Left mouse drag
-2 finger touchpad swipe left or right: Cycle through profiles
-Shift Modifer: Hold an action to use another set of controls
-When mapping keyboard and mouse:
-Toggle: The key will remain in a "held down" state until pressed again
-Macro: Assign multiple keys to one input
-Scan Code: Keys are interpreted differently. May be needed for certain games
-*If enabled</TextBlock>
+                <TextBox VerticalContentAlignment="Top" IsReadOnly="True" Margin="8" ScrollViewer.VerticalScrollBarVisibility="Auto" xml:space="preserve">
+    DS4 functions and shortcuts:
+
+        Hide DS4 Controller:&#x09;&#x09;&#x09;Hides DS4 controller from other apps (to prevent double input)
+        Click left side of touchpad:&#x09;&#x09;Left Touch
+        Click right side of touchpad:&#x09;&#x09;Right Touch
+        Click touchpad with 2 fingers:&#x09;&#x09;Multi Touch
+        Click upper part of touchpad:&#x09;&#x09;Upper Touch
+        PS + Options or hold PS for 10 secs:&#x09;Disconnect Controller (Only on Bluetooth)
+        Touch Touchpad + PS: &#x09;&#x09;Turn off touchpad movement (clicking still works)
+        Pad click on lower right: &#x09;&#x09;Right click (Best used when right side is used as a mouse button)
+        Two fingers up/down on touchpad*: &#x09;Scroll Up/Down
+        Tap then hold touchpad (if enabled): &#x09;Left mouse drag
+        2 finger touchpad swipe left or right: &#x09;Cycle through profiles
+
+    When mapping keyboard and mouse:
+
+        Shift Modifer: &#x09;&#x09;&#x09;Hold an action to use another set of controls
+        Toggle: &#x09;&#x09;&#x09;&#x09;The key will remain in a "held down" state until pressed again
+        Macro: &#x09;&#x09;&#x09;&#x09;Assigns multiple keys to one input
+        Scan Code: &#x09;&#x09;&#x09;&#x09;interprets keys differently. May be needed for certain games</TextBox>
             </TabItem>
             <TabItem Header="License">
-                <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True" VerticalScrollBarVisibility="Visible">GNU GENERAL PUBLIC LICENSE
+                <TextBox TextAlignment="Center" TextWrapping="NoWrap" Margin="8" xml:space="preserve" IsReadOnly="True" VerticalScrollBarVisibility="Visible">
+GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007
 
 Copyright (C) 2007 Free Software Foundation, Inc. &lt;https://fsf.org/&gt;
@@ -713,21 +716,20 @@ Public License instead of this License.  But first, please read
             </TabItem>
             <TabItem Header="Credits">
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Margin="10,0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink x:Name="siteLink" Click="SiteLink_Click" Foreground="{DynamicResource AccentColor}">Site</Hyperlink></TextBlock>
-                            <TextBlock Margin="20,0,0,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click" Foreground="{DynamicResource AccentColor}">Source</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" Foreground="{DynamicResource AccentColor}">Jays2Kings</Hyperlink></TextBlock>
-                            <TextBlock Margin="20,0,0,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" Foreground="{DynamicResource AccentColor}">InhexSTER (Starter of DS4Tool)</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock><Hyperlink x:Name="electrobrainsLink" Click="ElectrobrainsLink_Click" Foreground="{DynamicResource AccentColor}">electrobrains (Branched off of)</Hyperlink></TextBlock>
-                        </StackPanel>
-                        <Label Content="Translators:" Margin="0,20,0,0" />
+                    <StackPanel DockPanel.Dock="Top" Margin="10, 8">
+                        <Label Content="Source:" HorizontalAlignment="Center" Margin="0,0,0,4" />
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Margin="0,0,0,0"><Hyperlink x:Name="sourceLink" Click="SourceLink_Click" Foreground="{DynamicResource AccentColor}">MyFriendGi</Hyperlink></TextBlock>
+                            <TextBlock Margin="4,0,0,0" Text=":"/>
+                            <TextBlock Margin="4,0,0,0"><Hyperlink x:Name="ryochan7Link" Click="Ryochan7_Click" Foreground="{DynamicResource AccentColor}">Ryochan7</Hyperlink></TextBlock>
+                            <TextBlock Margin="4,0,0,0" Text=":"/>
+                            <TextBlock Margin="4,0,0,0"><Hyperlink x:Name="jays2KingsLink" Click="Jays2KingsLink_Click" Foreground="{DynamicResource AccentColor}">Jays2Kings</Hyperlink></TextBlock>
+                            <TextBlock Margin="4,0,0,0" Text=":"/>
+                            <TextBlock Margin="4,0,0,0"><Hyperlink x:Name="inhexSTERLink" Click="InhexSTERLink_Click" Foreground="{DynamicResource AccentColor}">InhexSTER</Hyperlink></TextBlock>
+                        </WrapPanel>
+                        <Label Content="Translators:" HorizontalAlignment="Center" Margin="0,4,0,0" />
                     </StackPanel>
-                    <TextBox TextWrapping="Wrap" xml:space="preserve" IsReadOnly="True"
+                    <TextBox VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="NoWrap" xml:space="preserve" IsReadOnly="True"
                              DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto" Margin="10,0,10,10">xLive - Arabic
 mayawei - Chinese
 SyaoranChang - Chinese (Taiwan)
@@ -742,13 +744,12 @@ gregory678 - Polish
 Leomelati - Portuguese (Brazilian)
 peter9811 - Spanish
 dondrakon, DragonZX, shikulja - Russian
-dondrakon - Ukranian
-                    </TextBox>
+dondrakon - Ukranian</TextBox>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Extras">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel Margin="4">
+                    <StackPanel Margin="8">
                         <Border BorderThickness="1" CornerRadius="10" BorderBrush="{DynamicResource BorderColor}">
                             <StackPanel Margin="8">
                                 <TextBlock Text="ViGEmBus" FontSize="18" FontWeight="Bold" />

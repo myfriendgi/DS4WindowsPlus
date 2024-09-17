@@ -452,7 +452,7 @@ Example: whyme_DS4Windows</value>
     <value>HidHide</value>
   </data>
   <data name="HidHideConfigClient" xml:space="preserve">
-    <value>HidHide Configuration Client</value>
+    <value>HidHide Configuration</value>
   </data>
   <data name="ExclusiveAccess" xml:space="preserve">
     <value>Exclusive Access</value>
@@ -547,7 +547,7 @@ The rotation setting is meant to help correct the orientation of an analog stick
     <value>Feature currently disabled in app due to driver issues. Hopefully issues get fixed in a future update.</value>
   </data>
   <data name="DualSRumbleForceGenericRescale" xml:space="preserve">
-    <value>Force usage of both % strength levels (General and DualSense specifc)</value>
+    <value>Force usage of both % strength levels</value>
   </data>
   <data name="DualSRumbleModeDisabled" xml:space="preserve">
     <value>Disabled</value>
@@ -559,7 +559,7 @@ The rotation setting is meant to help correct the orientation of an analog stick
     <value>Legacy</value>
   </data>
   <data name="DualSRumbleModeNPowerLevelTxt" xml:space="preserve">
-    <value>Rumble mode and strength level:</value>
+    <value>Rumble mode and strength:</value>
   </data>
   <data name="DualSRumbleModePassthru" xml:space="preserve">
     <value>Passthru</value>
@@ -797,7 +797,7 @@ Disabled:
     <value>Light</value>
   </data>
   <data name="ProfileEditor.VirtualDS4TrigOutput" xml:space="preserve">
-    <value>DS4 Trigger Output Mode</value>
+    <value>DS4 Trigger Mode</value>
   </data>
   <data name="Analog" xml:space="preserve">
     <value>Analog</value>
@@ -1145,7 +1145,7 @@ Disabled:
     <value>Scan Code</value>
   </data>
   <data name="SelectedProfile" xml:space="preserve">
-    <value>Selected Profile</value>
+    <value>Profile</value>
   </data>
   <data name="ShiftModifier" xml:space="preserve">
     <value>Shift Modifier</value>
@@ -1232,7 +1232,7 @@ Disabled:
     <value>Input Delay: N/A</value>
   </data>
   <data name="ReadingsControl.SixAxisXText" xml:space="preserve">
-    <value>SixAxis: X Axis is flipped so it is easier to read</value>
+    <value>Six Axis</value>
   </data>
   <data name="Requested" xml:space="preserve">
     <value>Requested</value>
@@ -1408,5 +1408,8 @@ Please click OK to confirm that you have read the message. Press Cancel to be re
   </data>
   <data name="Custom" xml:space="preserve">
     <value>Custom</value>
+  </data>
+  <data name="ProfileEditor.VirtualTrigButtonOutput" xml:space="preserve">
+    <value />
   </data>
 </root>

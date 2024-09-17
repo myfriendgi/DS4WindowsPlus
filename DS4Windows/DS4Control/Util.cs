@@ -24,6 +24,8 @@ using System.Threading.Tasks;
 using System.Text;
 using System.IO;
 using Microsoft.Win32;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace DS4Windows
 {
@@ -389,22 +391,25 @@ namespace DS4Windows
             string result = string.Empty;
             string installLocation =
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{48DD38C8-443E-4474-A249-AB32389E08F6}", "InstallLocation", "")?.ToString() ?? string.Empty;
+            List<string> testPaths = new List<string>();
+
             if (!string.IsNullOrEmpty(installLocation))
             {
-                string[] testPaths = new string[]
-                {
-                    Path.Combine(installLocation, "HidHideClient.exe"),
-                    Path.Combine(installLocation, "x64", "HidHideClient.exe"),
-                    Path.Combine(installLocation, "x86", "HidHideClient.exe"),
-                };
+                testPaths.Add(Path.Combine(installLocation, "HidHideClient.exe"));
+                testPaths.Add(Path.Combine(installLocation, "x64", "HidHideClient.exe"));
+                testPaths.Add(Path.Combine(installLocation, "x86", "HidHideClient.exe"));
+            }
 
-                foreach (string testPath in testPaths)
+            // This is the default installation path in 2024 (the installLocation registry entry is not added by default)
+            string programFiles = Environment.ExpandEnvironmentVariables("%ProgramW6432%");
+            testPaths.Add(Path.Combine(programFiles, "Nefarius Software Solutions\\HidHide\\x64\\HidHideClient.exe"));
+
+            foreach (string testPath in testPaths)
+            {
+                if (File.Exists(testPath))
                 {
-                    if (File.Exists(testPath))
-                    {
-                        result = testPath;
-                        break;
-                    }
+                    result = testPath;
+                    break;
                 }
             }
 

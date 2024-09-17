@@ -6,6 +6,7 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:local="clr-namespace:DS4WinWPF.DS4Forms"
         lex:LocalizeDictionary.DesignCulture=""
+        WindowStartupLocation="CenterOwner"
         lex:ResxLocalizationProvider.DefaultAssembly="DS4Windows"
         lex:ResxLocalizationProvider.DefaultDictionary="Strings"
         mc:Ignorable="d"
